@@ -1,1 +1,33 @@
 * flask-avatar
+** Installation
+   To install Flask-Avatar:
+
+   #+BEGIN_SRC shell
+   pip install flask-avatar
+   #+END_SRC
+
+   Or alternatively, you can download the repository and install manually by doing:
+
+   #+BEGIN_SRC sehll
+   git clone git@github.com:honmaple/flask-avatar.git
+   cd flask-avatar
+   python setup.py install
+   #+END_SRC
+
+**  Usage
+
+   #+BEGIN_SRC python
+   from flask_avatar import Avatar
+   [...]
+   Avatar(app)
+   #+END_SRC
+
+   Templates:
+
+   #+BEGIN_SRC html
+    {{ url_for('avatar',text = user.username )}}
+   #+END_SRC
+
+** Config
+
+   AVATAR_URL = "The avatar url,default 'avatar'"

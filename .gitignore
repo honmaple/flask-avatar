@@ -1,7 +1,7 @@
 venv/
 dist/
 build/
-README
+README.rst
 **/__pycache__/
 *.egg-info
 *.swp
