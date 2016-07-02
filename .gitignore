@@ -1,0 +1,10 @@
+venv/
+dist/
+build/
+README
+**/__pycache__/
+*.egg-info
+*.swp
+*.log
+*.pyc
+**/.webassets-cache/
