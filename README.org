@@ -1,7 +1,7 @@
 * flask-avatar
   [[https://pypi.python.org/pypi/Flask-Avatar][https://img.shields.io/badge/pypi-v0.1.0-brightgreen.svg]]
   [[https://pypi.python.org/pypi/Flask-Avatar][https://img.shields.io/badge/python-3.4-brightgreen.svg]]
-  [[license][https://img.shields.io/badge/license-BSD-blue.svg]]
+  [[LICENSE][https://img.shields.io/badge/license-BSD-blue.svg]]
 
 ** Example
    [[https://raw.githubusercontent.com/honmaple/flask-avatar/master/example/avatar1.png]]
