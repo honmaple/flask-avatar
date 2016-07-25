@@ -40,3 +40,5 @@
 ** Config
 
    AVATAR_URL = "The avatar url,default 'avatar'"
+** Thanks to
+   [[https://github.com/maethor/avatar-generator][https://github.com/maethor/avatar-generator]]
