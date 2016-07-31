@@ -6,7 +6,7 @@
 # Author: jianglin
 # Email: xiyang0807@gmail.com
 # Created: 2016-07-02 16:12:53 (CST)
-# Last Update:星期六 2016-7-2 18:18:5 (CST)
+# Last Update:星期日 2016-7-31 22:10:42 (CST)
 #          By:
 # Description:
 # **************************************************************************
@@ -14,7 +14,7 @@ import os
 from random import randint, seed
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
-from flask import make_response
+from flask import make_response, abort, current_app
 
 
 class Avatar(object):
@@ -26,11 +26,18 @@ class Avatar(object):
             self.app = None
 
     def init_app(self, app):
-        avatar = app.config.get('AVATAR_URL', 'avatar')
-        app.add_url_rule('/<text>/' + avatar, 'avatar', self.avatar)
+        avatar = app.config.get('AVATAR_URL', '/avatar')
+        app.add_url_rule(avatar + '/<text>',
+                         'avatar',
+                         self.avatar,
+                         defaults={'width': 128})
+        app.add_url_rule(avatar + '/<text>/<int:width>', 'avatar', self.avatar)
 
-    def avatar(self, text):
-        stream = GenAvatar.generate(128, text)
+    def avatar(self, text, width):
+        width_range = current_app.config.get('AVATAR_RANGE', [0, 512])
+        if width < width_range[0] or width > width_range[1]:
+            abort(404)
+        stream = GenAvatar.generate(width, text)
         buf_value = stream.getvalue()
         response = make_response(buf_value)
         response.headers['Content-Type'] = 'image/jpeg'

@@ -1,5 +1,5 @@
 * flask-avatar
-  [[https://pypi.python.org/pypi/Flask-Avatar][https://img.shields.io/badge/pypi-v0.1.0-brightgreen.svg]]
+  [[https://pypi.python.org/pypi/Flask-Avatar][https://img.shields.io/badge/pypi-v0.1.2-brightgreen.svg]]
   [[https://pypi.python.org/pypi/Flask-Avatar][https://img.shields.io/badge/python-3.4-brightgreen.svg]]
   [[LICENSE][https://img.shields.io/badge/license-BSD-blue.svg]]
 
@@ -37,8 +37,16 @@
     {{ url_for('avatar',text = user.username )}}
    #+END_SRC
 
+   or set *width* with:
+   #+BEGIN_SRC html
+    {{ url_for('avatar',text = user.username,width=60)}}
+   #+END_SRC
+
 ** Config
 
-   AVATAR_URL = "The avatar url,default 'avatar'"
+   #+BEGIN_SRC python
+   AVATAR_URL = '/avatar' #The avatar url,default '/avatar/<text>/<width>'
+   AVATAR_RANGE = [0,512] #set avatar range to allow generate,if disallow,abort(404).Default [0,512]
+   #+END_SRC
 ** Thanks to
    [[https://github.com/maethor/avatar-generator][https://github.com/maethor/avatar-generator]]

@@ -6,7 +6,7 @@
 # Author: jianglin
 # Email: xiyang0807@gmail.com
 # Created: 2016-07-02 16:12:02 (CST)
-# Last Update:星期六 2016-7-2 18:31:25 (CST)
+# Last Update:星期日 2016-7-31 22:13:0 (CST)
 #          By:
 # Description:
 # **************************************************************************
@@ -15,7 +15,7 @@ from setuptools import setup
 
 setup(
     name='Flask-Avatar',
-    version='0.1.0',
+    version='0.1.2',
     url='https://github.com/honmaple/flask-avatar',
     license='BSD',
     author='honmaple',
