@@ -23,12 +23,27 @@
    python setup.py install
    #+END_SRC
 
-**  Usage
+** Usage
 
    #+BEGIN_SRC python
    from flask_avatar import Avatar
    [...]
    Avatar(app)
+   # or use cachefunc
+   Avatar(app, cache=cachefunc)
+   #+END_SRC
+   
+   *cachefunc* must be a decorator:
+   example:
+   #+BEGIN_SRC python
+     def cachefunc(func):
+         @wrap(func)
+         def _cache(*args, **kwargs):
+             r = cacheclient.get("cache key")
+             if r is not None:
+                 return r
+             return func(*args, **kwargs)
+         return _cache
    #+END_SRC
 
    Templates:

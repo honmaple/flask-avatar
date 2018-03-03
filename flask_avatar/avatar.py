@@ -6,7 +6,7 @@
 # Author: jianglin
 # Email: xiyang0807@gmail.com
 # Created: 2016-07-02 16:12:53 (CST)
-# Last Update:星期日 2016-7-31 22:10:42 (CST)
+# Last Update: Saturday 2018-03-03 21:31:59 (CST)
 #          By:
 # Description:
 # **************************************************************************
@@ -18,20 +18,35 @@ from flask import make_response, abort, current_app
 
 
 class Avatar(object):
-    def __init__(self, app=None):
+    def __init__(self, app=None, cache=None):
+        '''
+        cache must be a decorator
+        example:
+
+        def cache(func):
+            @wrap(func)
+            def _cache(*args, **kwargs):
+                r = cacheclient.get("cache key")
+                if r is not None:
+                    return r
+                return func(*args, **kwargs)
+            return _cache
+        '''
+        self.app = app
+        self.cache = cache
         if app is not None:
-            self.app = app
             self.init_app(self.app)
-        else:
-            self.app = None
 
     def init_app(self, app):
-        avatar = app.config.get('AVATAR_URL', '/avatar')
-        app.add_url_rule(avatar + '/<text>',
-                         'avatar',
-                         self.avatar,
-                         defaults={'width': 128})
-        app.add_url_rule(avatar + '/<text>/<int:width>', 'avatar', self.avatar)
+        avatar_url = app.config.get('AVATAR_URL', '/avatar')
+        view = self.avatar
+        if self.cache is not None:
+            view = self.cache(view)
+        app.add_url_rule(
+            avatar_url + '/<text>', 'avatar', view, defaults={
+                'width': 128
+            })
+        app.add_url_rule(avatar_url + '/<text>/<int:width>', 'avatar', view)
 
     def avatar(self, text, width):
         width_range = current_app.config.get('AVATAR_RANGE', [0, 512])
